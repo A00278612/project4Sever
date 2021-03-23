@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.port;
+const port = process.env.PORT || 3000;
 
 
 let data = {};
@@ -11,7 +11,7 @@ let data = {};
 app.use(cors());
 
 // Configuring body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));h
 app.use(bodyParser.json());
 
 
