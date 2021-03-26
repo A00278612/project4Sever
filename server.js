@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-    db.select('*').from('plantData').then(data => res.json(data));
+    db.select('*').from('plantData').then(data => res.json(data)).catch(err => res.send(err));
 });
 
 app.post('/data', (req, res) => {
