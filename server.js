@@ -32,7 +32,6 @@ app.post('/data', (req, res) => {
    const {dth11Error,soil,humidity,temperature} = req.body;
    db('plantData').insert({dth11Error: dth11Error, SoilMoisture: soil, Humidity: humidity, Temperature: temperature})
    .then(data => console.log)
-   .catch(err => console.log(err));
    res.send('Server recevied the Data')
 })
 
