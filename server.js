@@ -9,7 +9,6 @@ app.use(cors());
 
 const db = require('knex')({
     client: 'pg',
-   
     connection: {
       connectionString : process.env.DATABASE_URL,
      ssl: { rejectUnauthorized: false }
@@ -22,6 +21,7 @@ const db = require('knex')({
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 
 app.get('/', (req, res) => {
