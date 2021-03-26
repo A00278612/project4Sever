@@ -8,13 +8,11 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 
 const db = require('knex')({
-    client: 'PG',
-    version: '5.7',
+    client: 'pg',
+   
     connection: {
-      host : '127.0.0.1',
-      user : 'postgres',
-      password : 'admin',
-      database : 'project4'
+      connectionString : process.env.DATABASE_URL,
+     ssl: true
     }
   });
 
