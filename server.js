@@ -1,14 +1,25 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const knex = require('knex');
 
 const app = express();
 const port = process.env.PORT || 3000;
-
-
-let data = {};
-
 app.use(cors());
+
+const db = require('knex')({
+    client: 'PG',
+    version: '5.7',
+    connection: {
+      host : '127.0.0.1',
+      user : 'postgres',
+      password : 'admin',
+      database : 'project4'
+    }
+  });
+
+
+
 
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,16 +27,13 @@ app.use(bodyParser.json());
 
 
 app.get('/', (req, res) => {
-    res.send(data);
+    db.select('*').from('plantData').then(data => res.json(data));
 });
-
-
-
 
 app.post('/data', (req, res) => {
    const {dth11Error,soil,humidity,temperature} = req.body;
-   data = {dth11Error: dth11Error, SoilMoisture: soil, Humidity: humidity, Temperature: temperature}
-   res.send(`error is ${dth11Error}: soil is ${soil}: humidity is ${humidity}: temperature is ${temperature}`)
+   db('plantData').insert({dth11Error: dth11Error, SoilMoisture: soil, Humidity: humidity, Temperature: temperature}).then(data => console.log);
+   res.send('Server recevied the Data')
 })
 
 app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
